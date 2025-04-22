@@ -1,0 +1,22 @@
+<?php require_once 'includes/header.php' ?>
+<?php
+if(!isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])){
+    header("Location:index.php");
+}
+
+
+$id = $_GET["id"];
+$user_query=mysqli_query($db, "SELECT * FROM users WHERE user_id = {$id}");
+$user=mysqli_fetch_assoc($user_query);
+if(!isset($user["user_id"]) || empty($user["user_id"])){
+    header("Location:index.php");
+
+}
+ ?>
+
+ <h2>Usuario: <strong><?php echo $user["name"]." ".$user["surname"];?></strong></h2>
+ <p>Datos:</p>
+ <p> Email:<?php echo $user["email"];?></p>
+ <p> Biografia:<?php echo $user["bio"];?></p>
+ <a href="index.php" class="btn btn-success">Volver al Listado</a>
+<?php require_once 'includes/footer.php' ?>
