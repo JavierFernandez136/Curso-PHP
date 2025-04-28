@@ -17,6 +17,7 @@ $users = mysqli_query($db,"SELECT * FROM users");
         <td><?=$user["email"]?></td>
         <td>
             <a href="ver.php?id=<?=$user["user_id"]?>" class="btn btn-success">Ver</a>
+            <a href="editar.php?id=<?=$user["user_id"]?>" class="btn btn-warning">Editar</a>
         </td>
     </tr>
 <?php }; ?>
