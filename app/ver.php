@@ -13,10 +13,19 @@ if(!isset($user["user_id"]) || empty($user["user_id"])){
 
 }
  ?>
+ <?php if($user["image"] != null) { ?>
+<div class="col-lg-2">
 
+    <img src="uploads/<?php echo $user["image"] ?>" width="120"/><br/>
+    
+</div>
+<?php } ?>
+<div class="col-lg-7">
  <h2>Usuario: <strong><?php echo $user["name"]." ".$user["surname"];?></strong></h2>
  <p>Datos:</p>
  <p> Email:<?php echo $user["email"];?></p>
  <p> Biografia:<?php echo $user["bio"];?></p>
- <a href="index.php" class="btn btn-success">Volver al Listado</a>
+</div>
+<div class="clearfix"></div>
+ <!--<a href="index.php" class="btn btn-success">Volver al Listado</a> -->
 <?php require_once 'includes/footer.php' ?>

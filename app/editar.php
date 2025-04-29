@@ -1,4 +1,4 @@
- <?php require_once 'includes/header.php'?>
+<?php require_once 'includes/header.php'?>
  <?php
 
 $errors = array();
@@ -84,7 +84,28 @@ if (isset($_POST["submit"])){
         $errors["role"]="Selecciona un rol de usuario";
 
     }
+    $image=null;
     if(isset($_FILES["image"]) && !empty($_FILES["image"] ["tmp_name"])){
+        //crear directorio uploads en el caso de que no exista
+        if(!is_dir("uploads")){
+            $dir=mkdir("uploads",0777,true);
+
+        }else{
+            $dir=true;
+        }
+
+        if($dir){
+            $filename = time()."-".$_FILES["image"] ["name"];
+            $muf= move_uploaded_file($_FILES["image"] ["tmp_name"], "uploads/".$filename);
+
+            $image = $filename;
+            if($muf){
+                $iamge_upload = true;
+            }else{
+                $iamge_upload=false;
+                $errors["image"] = "La imagen no se ha subido bien";
+            }
+        }
        
         
     }
@@ -101,6 +122,12 @@ if (isset($_POST["submit"])){
         if(isset($_POST["password"]) && !empty($_POST["password"])){
             $sql.="password = '".sha1($_POST["password"])."',";
         }
+
+        
+        if(isset($_FILES["image"]) && !empty($_FILES["image"] ["tmp_name"])){
+            $sql.="image = '{$image}',";
+        }
+
         $sql.="role = '{$_POST["role"]}' WHERE user_id = {$user["user_id"]};";
        
         $update_user= mysqli_query($db, $sql);
@@ -154,7 +181,10 @@ Apellido:
     </label>
     <br/>
     <label for="image">
-    Imagen:
+    <?php if($user["image"] != null) { ?>
+    Imagen de perfil: <img src="uploads/<?php echo $user["image"] ?>" width="120"/><br/>
+    <?php } ?>
+    Actualizar Imagen de perfil:
     <input type="file" name="image" class="form-control"/>
     </label>
     <br/>
