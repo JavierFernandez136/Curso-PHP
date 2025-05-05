@@ -15,8 +15,17 @@ require_once 'connect.php';
     <div class="container">
     <h1>Web con PHP</h1>
     <hr/>
-    <a href="index.php" class=" btn btn-primary">Home</a>
-    <a href="crear.php" class=" btn btn-primary">Crear nuevo usuario</a>
+    <!--Comprobar que la secion existe-->
+    <?php if(isset($_SESSION["logged"])){?>
+        <div class="col-lg-10">
+        <a href="index.php" class=" btn btn-primary">Home</a>
+        <a href="crear.php" class=" btn btn-primary">Crear nuevo usuario</a>
+        </div>
+    <div class="col-lg-2" >
+        <?php echo "Bienvenido ".$_SESSION["logged"] ["name"]." ". $_SESSION["logged"] ["surname"];?>
+        <a href="logout.php">Cerrar sesion</a>
+    </div>
     <hr/>
+    <div class="clearfix"></div>
+    <?php } ?>
     <?php $variable = "contenido"; ?>
-

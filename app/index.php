@@ -1,4 +1,5 @@
 <?php 
+include 'includes/redirect.php';
  include 'includes/header.php';
 $users = mysqli_query($db,"SELECT * FROM users");
 ?>
@@ -18,6 +19,10 @@ $users = mysqli_query($db,"SELECT * FROM users");
         <td>
             <a href="ver.php?id=<?=$user["user_id"]?>" class="btn btn-success">Ver</a>
             <a href="editar.php?id=<?=$user["user_id"]?>" class="btn btn-warning">Editar</a>
+            <?php if(isset($_SESSION["logged"]) && $_SESSION["logged"] ["role"] == 1){ ?>
+            <a href="borrar.php?id=<?=$user["user_id"]?>" class="btn btn-danger">Borrar</a>
+            <?php } ?>
+            
         </td>
     </tr>
 <?php }; ?>

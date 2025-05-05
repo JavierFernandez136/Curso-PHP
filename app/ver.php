@@ -1,3 +1,4 @@
+<?php include 'includes/redirect.php';?>
 <?php require_once 'includes/header.php' ?>
 <?php
 if(!isset($_GET["id"]) || empty($_GET["id"]) || !is_numeric($_GET["id"])){

@@ -1,4 +1,5 @@
-<?php require_once 'includes/header.php'?>
+<?php include 'includes/redirect.php';?>
+ <?php require_once 'includes/header.php'?>
  <?php
 
 $errors = array();
